@@ -32,3 +32,21 @@ The decode stage takes the raw 32-bit instruction from the fetch stage, breaks d
 ## Design Decisions
 - Includes an internal Register File handling registers `x0` through `x31` (with `x0` hardwired to zero).
 - Supports immediate generation for R, I, S, B, U, and J formats.
+
+---
+
+## Architecture: Execute Stage (`ex_stage.sv`)
+
+## Overview
+The execute stage contains the Arithmetic Logic Unit (ALU) and branch comparison logic. It performs arithmetic, logical, and shift operations, calculates memory addresses for loads/stores, and evaluates branch conditions.
+
+## Key Signals
+- `alu_op_i`: 4-bit ALU operation control signal.
+- `alu_src_i`: Selects second operand (0 for `rs2_data`, 1 for `imm`).
+- `operand_a_i`, `operand_b_i`: Input operands.
+- `alu_result_o`: Final computed result from the ALU.
+- `branch_taken_o`: Evaluates whether a conditional branch should be taken.
+
+## Design Decisions
+- Supports standard RV32I arithmetic (`ADD`, `SUB`), logical (`AND`, `OR`, `XOR`), shifts (`SLL`, `SRL`, `SRA`), and comparisons (`SLT`, `SLTU`).
+- Handles branch target calculations for conditional jumps.
