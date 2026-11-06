@@ -68,3 +68,19 @@ The memory stage interfaces with the data memory subsystem. It handles memory re
 ## Design Decisions
 - Acts as an interface layer between the core's execute outputs and the external data memory/cache subsystem.
 - Prepares data pathways for load/store routing.
+
+---
+
+## Architecture: Writeback Stage (`wb_stage.sv`)
+
+## Overview
+The writeback stage selects the final data to be written back to the register file from either the ALU result or the memory read data (for loads), completing the instruction execution loop.
+
+## Key Signals
+- `mem_to_reg_i`: Control flag determining whether to write memory data or ALU result back to the register file.
+- `alu_result_i`: ALU computed result.
+- `mem_rdata_i`: Data read from memory.
+- `reg_file_data_o`: Final multiplexed data directed back to the register file.
+
+## Design Decisions
+- Utilizes a simple multiplexer controlled by `mem_to_reg` to route either execution results or memory load data back to the register file inputs.
