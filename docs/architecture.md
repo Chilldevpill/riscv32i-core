@@ -50,3 +50,21 @@ The execute stage contains the Arithmetic Logic Unit (ALU) and branch comparison
 ## Design Decisions
 - Supports standard RV32I arithmetic (`ADD`, `SUB`), logical (`AND`, `OR`, `XOR`), shifts (`SLL`, `SRL`, `SRA`), and comparisons (`SLT`, `SLTU`).
 - Handles branch target calculations for conditional jumps.
+
+---
+
+## Architecture: Memory Stage (`mem_stage.sv`)
+
+## Overview
+The memory stage interfaces with the data memory subsystem. It handles memory read and write requests for load and store instructions while passing ALU results and control signals down to the writeback stage.
+
+## Key Signals
+- `mem_read_i`, `mem_write_i`: Control flags determining data memory operation type.
+- `alu_result_i`: Effective memory address calculated in the execute stage.
+- `write_data_i`: Data value to be stored (for store instructions).
+- `mem_rdata_i`: Raw data read from the memory interface.
+- `mem_rdata_o`, `alu_result_o`: Data passed forward to the writeback stage.
+
+## Design Decisions
+- Acts as an interface layer between the core's execute outputs and the external data memory/cache subsystem.
+- Prepares data pathways for load/store routing.
